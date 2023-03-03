@@ -1,47 +1,18 @@
-// import throttle from 'lodash.throttle';
+import throttle from 'lodash.throttle';
 import Player from '@vimeo/player';
 
 const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
-player.on('play', function () {
-  console.log(
-    player.getCurrentTime().then(function (seconds) {
-      // seconds = the current playback position
-      console.log(seconds);
-    })
-  );
-});
+const onPlay = function (data) {
+  localStorage.setItem('timeFilm', JSON.stringify(data.seconds));
 
-player
-  .getCurrentTime()
-  .then(function (seconds) {
-    // seconds = the current playback position
-    console.log(seconds);
-  })
-  .catch(function (error) {
-    // an error occurred
-  });
+  console.log(data.seconds);
+};
 
-player
-  .setCurrentTime(230)
-  .then(function (seconds) {
-    // seconds = the actual time that the player seeked to
-  })
-  .catch(function (error) {
-    switch (error.name) {
-      case 'RangeError':
-        // the time was less than 0 or greater than the video’s duration
-        break;
+player.on('timeupdate', throttle(onPlay, 1000));
 
-      default:
-        // some other error occurred
-        break;
-    }
-  });
-function getTimeUpdate(data) {
-  console.log(data);
-}
+player.setCurrentTime(localStorage.getItem('timeFilm'));
 
 player.getVideoTitle().then(function (title) {
   console.log('title:', title);

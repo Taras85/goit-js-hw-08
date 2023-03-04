@@ -5,15 +5,15 @@ const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
 const onPlay = function (data) {
-  localStorage.setItem('timeFilm', JSON.stringify(data.seconds));
+  localStorage.setItem('videoplayer-current-time', data.seconds);
 
   console.log(data.seconds);
 };
 
 player.on('timeupdate', throttle(onPlay, 1000));
 
-player.setCurrentTime(localStorage.getItem('timeFilm'));
+player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
 
-player.getVideoTitle().then(function (title) {
-  console.log('title:', title);
+player.setColor('#FF6347').then(function (color) {
+  console.log('#D8E0FF');
 });

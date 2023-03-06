@@ -1,4 +1,3 @@
-// feedback - form - state;
 import throttle from 'lodash.throttle';
 
 const feedBackForm = document.querySelector('.feedback-form');

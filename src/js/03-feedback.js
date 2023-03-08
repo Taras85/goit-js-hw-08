@@ -7,9 +7,19 @@ feedBackForm.addEventListener('input', throttle(feedBackInput, 500));
 
 function feedBackSabmit(event) {
   event.preventDefault();
-  console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
-  feedBackForm.reset();
-  localStorage.removeItem('feedback-form-state');
+
+  if (
+    !feedBackForm.elements.email.value ||
+    !feedBackForm.elements.message.value
+  ) {
+    return alert(
+      'All fields are due buti orders! \n Всі поля повинні бути заповнені'
+    );
+  } else {
+    console.log(JSON.parse(localStorage.getItem('feedback-form-state')));
+    feedBackForm.reset();
+    localStorage.removeItem('feedback-form-state');
+  }
 }
 function feedBackInput() {
   const userData = {

@@ -5,7 +5,7 @@ const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
 const onPlay = function (data) {
-  console.log(data);
+  // console.log(data);
   localStorage.setItem('videoplayer-current-time', data.seconds);
   if (data.seconds === data.duration) {
     localStorage.removeItem('videoplayer-current-time');
